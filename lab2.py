@@ -89,7 +89,7 @@ all_columns = original_columns + new_columns
 
 
 convertedDataFrame = pd.DataFrame(housing_prepared, columns=all_columns)
-print(convertedDataFrame.head())
+# print(convertedDataFrame.head())
 
 
 housing_labels = strat_train_set["median_house_value"].copy()
@@ -114,6 +114,24 @@ tree_reg.fit(housing_prepared, housing_labels)
 
 housing_predictions_tree = tree_reg.predict(housing_prepared)
 calculateRootMeanSquareError(housing_labels, housing_predictions_tree, "Decision Tree")
+
+def display_scores(scores):
+    print("Scores:", scores)
+    print("Mean:", scores.mean())
+    print("Standard deviation:", scores.std())
+          
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import cross_val_score
+
+forest_reg = RandomForestRegressor()
+forest_reg.fit(housing_prepared, housing_labels)
+housing_predictions_random = tree_reg.predict(housing_prepared)
+
+scores = cross_val_score(forest_reg, housing_prepared, housing_labels, scoring="neg_mean_squared_error", cv=10)
+forest_rmse_scores = np.sqrt(-scores)
+
+display_scores(forest_rmse_scores)
+
 
 
 

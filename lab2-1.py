@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error
 
 
 
-housing_raw_data = pd.read_csv('D:/hv.se/AI/handson-ml2/datasets/housing/housing.csv')
+housing_raw_data = pd.read_csv()
 
 housing_raw_data["income_cat"] = pd.cut(housing_raw_data["median_income"],
                                bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
